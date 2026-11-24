@@ -4,10 +4,31 @@
 ---
 
 ## Deskripsi Proyek
-Proyek ini membangun model **Convolutional Neural Network (CNN)** menggunakan 
-Transfer Learning MobileNetV2 untuk mengklasifikasikan jenis pemandangan dari 
-sebuah foto ke dalam 4 kategori, sekaligus memberikan rekomendasi destinasi 
-wisata Indonesia beserta waktu terbaik berkunjung berdasarkan musim.
+Proyek ini membangun model **Sequential Convolutional Neural Network (CNN)** untuk mengklasifikasikan jenis pemandangan dari 
+sebuah foto ke dalam 4 kategori, sekaligus memberikan rekomendasi destinasi wisata Indonesia beserta waktu terbaik berkunjung berdasarkan musim.
+
+---
+
+## Arsitektur Model
+- **Tipe Model:** Sequential CNN (Convolutional Neural Network)
+- **Input Shape:** 150x150x3
+
+### Susunan Layer:
+| Layer | Konfigurasi | Output Shape |
+|-------|------------|--------------|
+| Conv2D | 32 filter, kernel 3x3, ReLU, padding same | 150x150x32 |
+| BatchNormalization | - | 150x150x32 |
+| MaxPooling2D | pool size 2x2 | 75x75x32 |
+| Conv2D | 64 filter, kernel 3x3, ReLU, padding same | 75x75x64 |
+| BatchNormalization | - | 75x75x64 |
+| MaxPooling2D | pool size 2x2 | 37x37x64 |
+| Conv2D | 128 filter, kernel 3x3, ReLU, padding same | 37x37x128 |
+| BatchNormalization | - | 37x37x128 |
+| MaxPooling2D | pool size 2x2 | 18x18x128 |
+| Flatten | - | 41472 |
+| Dense | 256 neuron, ReLU | 256 |
+| Dropout | rate 0.5 | 256 |
+| Dense (Output) | 6 neuron, Softmax | 6 |
 
 ---
 
@@ -30,21 +51,6 @@ wisata Indonesia beserta waktu terbaik berkunjung berdasarkan musim.
   - Train Set : ~11.200 gambar (80% dari seg_train)
   - Validation : ~2.800 gambar (20% dari seg_train)
   - Test Set   : ~3.000 gambar (seg_test)
-
----
-
-## Arsitektur Model
-- **Base Model:** MobileNetV2 (pretrained ImageNet)
-- **Input Shape:** 150x150x3
-- **Tambahan Layer:**
-  - GlobalAveragePooling2D
-  - Dense 256 (ReLU)
-  - BatchNormalization
-  - Dropout 0.5
-  - Dense 6 (Softmax)
-- **Training:** 2 tahap (Frozen + Fine Tuning)
-- **Optimizer:** Adam
-- **Loss Function:** Categorical Crossentropy
 
 ---
 
