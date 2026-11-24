@@ -57,9 +57,9 @@ sebuah foto ke dalam 4 kategori, sekaligus memberikan rekomendasi destinasi wisa
 ## Hasil Akurasi
 | Metrik | Nilai |
 |--------|-------|
-| Train Accuracy | >95% |
-| Validation Accuracy | >95% |
-| Test Accuracy | >95% |
+| Train Accuracy | 92% |
+| Validation Accuracy | 92% |
+| Test Accuracy | 92% |
 
 ---
 
